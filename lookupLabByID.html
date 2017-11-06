@@ -35,12 +35,16 @@ Please enter your Student ID Number:&nbsp;&nbsp; <input type="text" name="idno" 
 		}
 
 	function test_ID(){
-
+		var value = document.getElementById('idno').value;
+		console.log(value.length);
 		if(!/^\d*$/.test(document.getElementById('idno').value)){
         	document.getElementById('dvTable').innerHTML = "Please Enter a valid ID Number";
-		return false;		
-		} else if(!/^\d{7}$/.test(document.getElementById('idno').value)){
-        	document.getElementById('dvTable').innerHTML = "";
+			return false;		
+			} else if(value.length < 7){
+        	document.getElementById('dvTable').innerHTML = "Enter " + (7 - value.length) + " more digits";
+        	return false;
+			} else if(value.length > 7){
+        	document.getElementById('dvTable').innerHTML = "Too many digits";
         	return false;
     		} else {
        		document.getElementById('dvTable').innerHTML = "";
