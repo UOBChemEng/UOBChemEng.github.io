@@ -29,7 +29,7 @@ Please enter your Student ID Number:&nbsp;&nbsp; <input type="text" name="idno" 
 	var my_callback = function(data)
 		{
 		data = parse(data);
-		//console.log(data);
+		if(!data){document.getElementById('dvTable').innerHTML = "ID Number Not Found";return false;}
 		data_array = second_parse(data[0]);
 		build_table(data_array);
 		}
