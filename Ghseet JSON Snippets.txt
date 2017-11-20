@@ -1,0 +1,39 @@
+To get a sheet as JSONP
+
+https://spreadsheets.google.com/feeds/list/SPREADSHEET_ID/WORKSHEET_ID/public/values?alt=json-in-script&callback=myFunc
+
+To get the worksheet ID, search in the source of: 
+
+https://spreadsheets.google.com/feeds/worksheets/SPREADSHEET_ID/private/full
+
+
+SortKeys of Minutes_SSC_17
+https://spreadsheets.google.com/feeds/list/1G8Sa9qhqZS0xuSD5hxYF3lRtz2tJc-Gv8GIqVzfa4p0/otxafpo/public/values?alt=json-in-script&callback=myFunc
+
+
+<select id="dropDown">
+    <option value="" selected="selected">Show All</option>
+    <option value="School">Show School</option>
+    <option value="Main_Library">Show Main Library</option>
+    <option value="Foundation_Year">Show Foundation Year</option>
+    <option value="Year_1">Show Year 1</option>
+    <option value="Year_2">Show Year 2</option>
+    <option value="Year_3">Show Year 3</option>
+    <option value="Year_4">Show Year 4</option>
+    <option value="MSc">Show MSc</option>
+    <option value="Other">Show Other</option>
+    <option value="Unsorted">Show Uncategorised</option>
+</select>
+			$('#dropDown').change(function () {
+    			$('.School').hide()    
+    			$('.Main_Library').hide()    
+    			$('.Foundation_Year').hide()    
+    			$('.Year_1').hide()    
+    			$('.Year_2').hide()    
+    			$('.Year_3').hide()    
+    			$('.Year_4').hide()    
+    			$('.MSc').hide()    
+    			$('.Other').hide()    
+    			$('.Unsorted').hide()  
+    			$('.' + this.value).show();  
+				});

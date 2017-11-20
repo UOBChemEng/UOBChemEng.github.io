@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/htm5-boilerplate_v6.0.1_normalize.css">
+        <link rel="stylesheet" href="css/htm5-boilerplate_v6.0.1_main.css">
+        <link rel="stylesheet" href="css/UOBChemEngMain-0.0.1.css">
+	</head>
+	<body>
+
+		<div id="vtab1" class="vtab">
+		</div>
+		<div id="defaultOpenvtabcontent" class="vtabcontent">
+			<h3 style="text-align:center;">Staff Student Committee Minutes</h3>
+			<div id="ajax-loader-1">
+    			<img src="img/UOBChemEng-loading.gif" class="ajax-loader"/>
+			</div>  		
+		</div>
+     
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sheetrock/1.1.4/dist/sheetrock.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
+        <script>window.sheetrock || document.write('<script src="js/vendor/sheetrock.min.js"><\/script>')</script>
+        <script src="js/UOBChemEngMain-0.0.2.js"><\/script>')</script>
+        <script src="js/UOBChemEngSSC-0.0.2.js"><\/script>')</script>
+        <script language="javascript">
+ 			var sortKeysheet = getSpreadsheetUrl('SSC_Minutes','SortKeys');
+ 			var MasterSheet = getSpreadsheetUrl('SSC_Minutes','MasterSheet');
+			$('#ajax-loader-1').show(); 
+			buildSscPage();
+        </script>
+	</body>
+</html> 
+
+
