@@ -35,15 +35,14 @@
             var printRequired = true;
             var filterRequired = true;
             var selectFirstTab = true;
-            var filterDefault = "";
+            //var filterDefault = "";
+            var filterDefault = urlParam('fbl');
             var currentvtab = "defaultOpenvtabcontent";
             var sortKeysheet = getSpreadsheetUrl('SSC_Minutes','SortKeys');
  			var MasterSheet = getSpreadsheetUrl('SSC_Minutes','MasterSheet');
 			$('#ajax-loader-1').show();
 			buildSscPage();
 
-            var fbl = urlParam('fbl');
-            console.log('fbl= '+fbl);
         </script>
 	</body>
 </html>
