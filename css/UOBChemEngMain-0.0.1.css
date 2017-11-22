@@ -161,6 +161,10 @@ button:focus {
     outline: none;
 }
 
+button:active {
+outline: none;
+}
+
 #filterdropdown{
     text-align:left;
     vertical-align: center;
