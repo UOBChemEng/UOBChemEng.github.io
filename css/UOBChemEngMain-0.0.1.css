@@ -157,13 +157,10 @@ div.menuwrap-v{
     margin-top:0px;
 }
 
-button:focus {
-    outline: none;
+*:focus {
+    outline: none;!important
 }
 
-button:active {
-outline: none;
-}
 
 #filterdropdown{
     text-align:left;
