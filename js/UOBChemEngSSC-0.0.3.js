@@ -157,7 +157,7 @@ function getSscLevelModule (error,options,response){
 						});
             }
 	    makefiltermenu(levelsResponseObj);
-		document.getElementById('vtab1').children[0].click();
+		if(selectFirstTab){document.getElementById('vtab1').children[0].click();}
     	}
 	}
 

@@ -23,6 +23,7 @@ div.vtabcontent {
 div.vtabwrap {
     position: relative;
     width:120px;
+    min-width:120px;
     height:inherit;
 }
 
@@ -157,8 +158,8 @@ div.menuwrap-v{
     margin-top:0px;
 }
 
-*:focus {
-    outline: none;!important
+button:focus {
+    outline: none;
 }
 
 
