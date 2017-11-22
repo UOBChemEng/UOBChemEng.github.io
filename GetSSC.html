@@ -36,7 +36,7 @@
             var filterRequired = true;
             var selectFirstTab = true;
             //var filterDefault = "";
-            var filterDefault = urlParam('fbl');
+            var filterDefault = urlParam('fbl',iframe.contentWindow);
             var currentvtab = "defaultOpenvtabcontent";
             var sortKeysheet = getSpreadsheetUrl('SSC_Minutes','SortKeys');
  			var MasterSheet = getSpreadsheetUrl('SSC_Minutes','MasterSheet');
