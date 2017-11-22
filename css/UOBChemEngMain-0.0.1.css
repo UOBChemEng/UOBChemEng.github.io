@@ -1,64 +1,196 @@
 * {box-sizing: border-box}
 
 /* Vertical Tabs */
-div.vtab {
-    float: left;
+div.vtab-container {
+    display:flex;
     border: none;
     background-color: inherit;
-    border-top: 1px solid #ccc;
-    width: 15%;
     height: 600px;
-}
-
-/* Style the buttons inside the tab */
-div.vtab button {
-    display: block;
-    background-color: #f2f2f2;
-    color: #394b58;
-    padding: 16px 16px;
-    width: 100%;
-    border: none;
-	border-bottom: 1px solid #ccc;
-    border-left: 1px solid #ccc;
-    outline: none;
-    text-align: left;
-    cursor: pointer;
-    transition: 0.3s;
-    font-size: 17px;
-}
-
-/* Change background color of buttons on hover */
-div.vtab button:hover {
-    background-color: #7CA3BF;
-}
-
-/* Create an active/current "tab button" class */
-div.vtab button.active {
-    background-color: #394b58;
-    color: white;
-    
+    margin: 20px;
 }
 
 /* Style the tab content */
-.vtabcontent {
-    float: left;
+div.vtabcontent {
+    flex-grow: 1;
     padding: 0px 12px;
     border: 1px solid #ccc;
-    width: 85%;
-    border: 1px solid #ccc;
-    height: 600px;
-	overflow:scroll;
+    /*border-left: none;*/
+    height: inherit;
+	overflow-y:scroll;
+    z-index:0;
 }
 
-#ajax-loader-1 {  
-    position:relative;
-    top:0;
-    left:0;
+div.vtabwrap {
+    position: relative;
+    width:120px;
+    height:inherit;
+}
+
+div.vtab {
+    position: relative;
+    padding-top:10px;
+    right:-1px;
+    font-size: 17px;
+    /*border-right: 1px solid #ccc;*/
+    text-align:right;
+    width:120px;
+    /*margin-right: -5px;*/
+    height:inherit;
+    overflow: hidden;
+    z-index: 1;
+
+}
+
+div.vtab button {
+  border: 1px solid #ccc;
+  background: #eee;
+  background: linear-gradient(top, #eee 50%, #ddd 100%);
+  display: inline-block;
+  position:relative;
+  z-index: 0;
+  border-radius: 5px 0px 0px 5px;
+  width:inherit;
+  color: #999;
+  box-shadow: 1px 0 3px rgba(0, 0, 0, 0.4), inset 0 1px 0 #FFF;
+  text-shadow: 1px 0px #FFF;
+  /*margin-top: -1px;*/
+  padding: 10px 10px;
+}
+div.vtab button.active {
+  background: #FFF;
+  color: black;
+  z-index: 2;
+  border-right-color: #FFF;
+}
+
+div.vtab button.active:before,
+div.vtab button.active:after {
+  box-shadow: 3px 0px 0 #fff;
+}
+
+div.vtab:before {
+  position: absolute;
+  content: "";
+  width: 120px;
+  top: 0;
+  left: 0;
+  border-right: 1px solid #ccc;
+  z-index: 3;
+}
+
+div.vtab button:before {
+  position: absolute;
+  right: -1px;
+  top: -7px;
+  width: 6px;
+  height: 6px;
+  content: "";
+  border: 1px solid #ccc;
+  border-bottom-right-radius: 6px;
+  border-width: 0px 1px 1px 0px;
+  box-shadow: 3px 0px 0 #eee;
+}
+div.vtab button:after {
+  position: absolute;
+  right: -1px;
+  bottom:-7px;
+  width: 6px;
+  height: 6px;
+  content: "";
+  border: 1px solid #ccc;
+  border-top-right-radius: 6px;
+  border-width: 1px 1px 0px 0px;
+  box-shadow: 3px 0px 0 #eee;
+
+}
+
+
+div.vtab button:hover {
+  color: black;
+}
+
+div.menuwrap-v{
+    position: absolute;
+    z-index: 10;
+    bottom: 0px;
+    left: 0px;
+    padding: 0px 5px 0 0;
+    width:inherit;
+}
+
+.menuwrap-button{
+    position: relative;
+    padding-top:5px;
+    padding-bottom:5px;
+    font-size: 17px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
     width:100%;
-    height:100%;
-    z-index:1000;
-    opacity: .8;
- }
+    background-color:#eee;
+    box-shadow: 1px 0 3px rgba(0, 0, 0, 0.4), inset 0 1px 0 #FFF;
+    text-shadow: 1px 0px #FFF;
+    margin-top:5px;
+}
+
+.menuwrap-button:active{
+    background-color:#ddd;
+    box-shadow: 0px 0 1px rgba(0, 0, 0, 0.4), inset 0 1px 0 #FFF;
+}
+
+.menuwrap-filter-wrap{
+    padding: 0px 5px;
+}
+
+.menuwrap-filter-content{
+    position: relative;
+    font-size: 14px;
+    font-family:sans-serif;
+    text-align: center;
+    border: 1px solid #ccc;
+    width:100%;
+    background-color:#eee;
+
+}
+
+#button-Filter{
+    margin-top:0px;
+}
+
+#filterdropdown{
+    text-align:left;
+    vertical-align: center;
+    list-style-type:none;
+    padding:0px;
+    margin:0px;
+}
+#filterdropdown li{
+    font-family:sans-serif;
+    padding:2px 0 2px 16px;
+    color:black;
+    cursor:pointer;
+}
+#filterdropdown li:hover{
+    background-color:#ddd !important;
+}
+
+#filterdropdown li.vis:after{
+    position:absolute;
+    right:8px;
+    content: "\2713";
+}
+
+#filterdropdown li.Hide{
+    padding: 5px 0px 5px 0px;
+    border-bottom: 1px solid #ccc;
+    text-align:center;
+}
+#filterdropdown li.Show{
+    padding: 5px 0px 5px 0px;
+    border-bottom: 1px solid #ccc;
+    text-align:center;
+}
+
 
 .ajax-loader {
     position: relative;
@@ -66,5 +198,5 @@ div.vtab button.active {
     top: 25%;
     margin-left: -8px; /* -1 * image width / 2 */
     margin-top: -8px;  /* -1 * image height / 2 */
-    display: block;     
+    display: block;
 }

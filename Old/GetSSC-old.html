@@ -11,36 +11,50 @@
         <link rel="stylesheet" href="css/UOBChemEngMain-0.0.1.css">
 	</head>
 	<body>
-        <div id="vtab1-container" class="vtab-container">
-            <div id="vtabwrap" class="vtabwrap">
-                <div id="vtab1" class="vtab">
-                </div>
-            </div>
-            <div id="defaultOpenvtabcontent" class="vtabcontent">
-                <h3 style="text-align:center;">Staff Student Committee Minutes</h3>
-                <div id="ajax-loader-1">
-                    <img src="img/UOBChemEng-loading.gif" class="ajax-loader"/>
-                </div>
-            </div>
+
+		<p>Click on the buttons inside the tabbed menu:</p>
+
+		<div id="vtab1" class="vtab">
+		</div>
+		<div id="defaultOpenvtabcontent" class="vtabcontent">
+			<h3>Staff Student Committee Minutes</h3>
+			<p id="vtabprogress">Retrieving Data.</p>
+		</div>
+<!--		<div id="d16082016" class="vtabcontent">
+			<h3>London</h3>
+			<p>London is the capital city of England.</p>
+		</div>
+		<div id="d12042017" class="vtabcontent">
+			<h3>Paris</h3>
+			<p>Paris is the capital of France.</p> 
+		</div>
+		<div id="d08112017" class="vtabcontent">
+			<h3>Tokyo</h3>
+			<p>Tokyo is the capital of Japan.</p>
+		</div>
+-->
+		
+
+<table id="statistics" class="table table-condensed table-striped"></table>
 
 
+     
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sheetrock/1.1.4/dist/sheetrock.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
         <script>window.sheetrock || document.write('<script src="js/vendor/sheetrock.min.js"><\/script>')</script>
-        <script src="js/UOBChemEngMain-0.0.2.js"></script>
-        <script src="js/UOBChemEngSSC-0.0.3.js"></script>
+        <script src="js//UOBChemEngMain-0.0.1.js"><\/script>')</script>
+        <script src="js//UOBChemEngSSC-0.0.1.js"><\/script>')</script>
         <script language="javascript">
-            var menuRequired = true;
-            var printRequired = true;
-            var filterRequired = true;
-            var filterDefault = "";
-            var currentvtab = "defaultOpenvtabcontent";
-            var sortKeysheet = getSpreadsheetUrl('SSC_Minutes','SortKeys');
- 			var MasterSheet = getSpreadsheetUrl('SSC_Minutes','MasterSheet');
-			$('#ajax-loader-1').show();
+ 			var sortKeysheet = getSpreadsheetUrl('Minutes_SSC_2017','SortKeys');
+ 			var MasterSheet = getSpreadsheetUrl('Minutes_SSC_2017','MasterSheet');
 			buildSscPage();
+			
+			
 
+         	
         </script>
 	</body>
-</html>
+</html> 
+
+
