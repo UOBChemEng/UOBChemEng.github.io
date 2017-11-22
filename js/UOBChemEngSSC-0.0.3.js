@@ -1,6 +1,6 @@
 function buildSscPage()
 	{
-	sheetrock({	url: sortKeysheet,query: "select D where D is not null",fetchSize: 9,callback: makeSscVtabs},);
+	sheetrock({	url: sortKeysheet,query: "select D where D is not null",fetchSize: 9,callback: makeSscVtabs});
 	}
 
 
