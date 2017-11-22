@@ -157,6 +157,10 @@ div.menuwrap-v{
     margin-top:0px;
 }
 
+button:focus {
+    outline: none;
+}
+
 #filterdropdown{
     text-align:left;
     vertical-align: center;
