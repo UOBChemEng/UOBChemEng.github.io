@@ -79,7 +79,7 @@ function printElement(myElementID,myWindowTitle,dynamicElementID)
 	    w.close();
 	}
 
-var urlParam = function(name, w){
+function urlParam(name, w){
 	    w = w || window;
 	    var rx = new RegExp('[\&|\?]'+name+'=([^\&\#]+)'),
 	        val = w.location.search.match(rx);
