@@ -5,8 +5,16 @@
 	<body>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script language="javascript">
-        var iframeref = window.parent.document.getElementsByTagName("body");
-        $(iframeref).removeClass('course-menu-expanded');
+        var bodyref = window.parent.document.getElementsByTagName("body");
+        var iconref = window.parent.document.getElementsById("courseMenuToggle");
+        var divref = window.parent.document.getElementsById("left-side");
+
+        $(bodyref).removeClass('course-menu-expanded');
+        $(iconref).attr('aria-label', 'Show courses navigation menu');
+        $(iconref).attr('title', 'Show courses navigation menu');
+        $(divref).css("display","none");
+
+
     </script>
 	</body>
 </html>
