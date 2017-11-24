@@ -3,16 +3,15 @@
     <head>
 	</head>
 	<body>
+
+<p id="output"></p>
+
+
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script language="javascript">
-        var bodyref = window.parent.document.getElementsByTagName("body");
-        var iconref = window.parent.document.getElementsById("courseMenuToggle");
-        var divref = window.parent.document.getElementsById("left-side");
+        var bodyref = window.parent.document.getElementsByTagName("script");
 
-        $(bodyref).removeClass('course-menu-expanded');
-        $(iconref).attr('aria-label', 'Show courses navigation menu');
-        $(iconref).attr('title', 'Show courses navigation menu');
-        $(divref).css("display","none");
+        $('#output').text(bodyref);
 
 
     </script>
