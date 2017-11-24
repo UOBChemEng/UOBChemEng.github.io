@@ -20,17 +20,24 @@ function makeSscVtabs (error,options,response)
   		var newtabcode2 = '</h3>';
         var loadercode1 = '<div id="ajax-loader-';
   		var loadercode2 = '"><img src="img/UOBChemEng-loading.gif" class="ajax-loader"/></div>';
+		console.log("Pmtg Out: "+pmtg);
+		var dateNow = new Date();
 		for (var i =0; i < response.rows.length; i++){
 			var txt1 = sanitize(response.rows[i].cellsArray[0]);
 			var txt2 = 'd'+txt1.replace(/\//g, '');
-			dateObj['date'].push(txt1);
-			dateObj['dateID'].push(txt2);
-			dateObj['keyVal'][txt2] = txt1;
-			makeSscButton('vtab1', txt1, txt2)
-			$('#defaultOpenvtabcontent').after('<div id="'+txt2+'" class="vtabcontent" style="display:none;">'
+			var dateparts = txt1.split('/');
+			var datefromresponse = new Date(dateparts[2],dateparts[1]-1,dateparts[0]);
+			console.log("Pmtg "+i+": "+pmtg);
+			if(datefromresponse<dateNow||pmtg!=false){
+				dateObj['date'].push(txt1);
+				dateObj['dateID'].push(txt2);
+				dateObj['keyVal'][txt2] = txt1;
+				makeSscButton('vtab1', txt1, txt2)
+				$('#defaultOpenvtabcontent').after('<div id="'+txt2+'" class="vtabcontent" 	style="display:none;">'
 				+newtabcode1+txt1+newtabcode2
 			    +loadercode1+txt2+loadercode2+'</div>');
 			}
+		}
 		$('#ajax-loader-1').hide();
 
 		var parentElementID = document.getElementById('defaultOpenvtabcontent')

@@ -40,10 +40,12 @@
             var printRequired = true;
             var filterRequired = true;
             var selectFirstTab = true;
+            var pmtg=false;
             //var filterDefault = "";
             var iframeref = window;
             var filterDefault = urlParam('fbl',iframeref);
             var resolvedDefault = urlParam('rsl',iframeref);
+            var pmtg = urlParam('pmtg',iframeref);
             var currentvtab = "defaultOpenvtabcontent";
             var sortKeysheet = getSpreadsheetUrl('SSC_Minutes','SortKeys');
  			var MasterSheet = getSpreadsheetUrl('SSC_Minutes','MasterSheet');
