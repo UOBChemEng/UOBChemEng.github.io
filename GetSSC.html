@@ -22,14 +22,19 @@
                     <img src="img/UOBChemEng-loading.gif" class="ajax-loader"/>
                 </div>
             </div>
+        </div>
 
+<br style="clear: both;">
+<div style="float:none;width:100%;height:600px;overflow-y:auto;">
+<table id='output' style="width:90%;margin:auto"></table>
+</div>
 
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sheetrock/1.1.4/dist/sheetrock.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
         <script>window.sheetrock || document.write('<script src="js/vendor/sheetrock.min.js"><\/script>')</script>
         <script src="js/UOBChemEngMain-0.0.2.js"></script>
-        <script src="js/UOBChemEngSSC-0.0.3.js"></script>
+        <script src="js/UOBChemEngSSC-0.0.4.js"></script>
         <script language="javascript">
             var menuRequired = true;
             var printRequired = true;
@@ -38,6 +43,7 @@
             //var filterDefault = "";
             var iframeref = window;
             var filterDefault = urlParam('fbl',iframeref);
+            var resolvedDefault = urlParam('rsl',iframeref);
             var currentvtab = "defaultOpenvtabcontent";
             var sortKeysheet = getSpreadsheetUrl('SSC_Minutes','SortKeys');
  			var MasterSheet = getSpreadsheetUrl('SSC_Minutes','MasterSheet');

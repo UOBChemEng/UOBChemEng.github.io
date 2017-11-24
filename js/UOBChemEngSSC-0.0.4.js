@@ -202,21 +202,20 @@ function buildSscMinutes (error,options,response){
 		mylevelsObj['lname'].push('Unsorted');
 		var myModules = {};
 		for (var i = 0; i < mylevelsObj['lkey'].length; i++){
+			var resolvedCtr4=0;
 			var levelname = mylevelsObj['lname'][i];
 			var myModules = levelModuleObj[mylevelsObj['lkey'][i]];
 			var levelCtr=0;
-			for(key in myModules){if(myModules[key].length>0){levelCtr=1;}}
-			if(levelCtr==1){
+			for(key in myModules){if(myModules[key].length>0){levelCtr++;}}
+			if(levelCtr > 0){
 				makeSscPara(dateID, levelname, levelname,'text-align:left;font-weight: bold;');
 			}
 			for(key in myModules){
-				var resolvedCtr2=0;
 				if(myModules[key].length>0){
+					var resolvedCtr2=0;
+					var resolvedCtr3=0;
 					makeSscPara(dateID, key, levelname,'text-align:left;font-weight: bold;text-indent:20px;');
 					for(var j = 0; j < myModules[key].length; j++){
-var tmpHidIt='Not Hiddable';//Debugging
-var madeIt="";//Debugging
-
 						var issueCtr=0;
 						var tabRowCtr=0;
 						var resolvedCtr=0;
@@ -252,7 +251,7 @@ var madeIt="";//Debugging
 							}
 							if(myModules[key][j][6] == 'Resolved'){
 								$(tableObj).addClass('Resolved');
-								resolvedCtr++;
+								resolvedCtr++;resolvedCtr3++;
 							}
 						}
 						var jtest = myModules[key].length;
@@ -260,43 +259,43 @@ var madeIt="";//Debugging
 						if(jj<jtest){
 							if(myModules[key][jj][2]){issueCtr=1;}
 						}
-						if(issueCtr>0&&tabRowCtr>0||jj==jtest){
-							var para = document.createElement('p');
-							para.innerHTML += '&nbsp;';
-							para.setAttribute('style', 'background-color:#ccc;');//Debugging
-							para.setAttribute('class', levelname.replace(/ /g,"_"));
-							if(resolvedCtr > 0 && jj < jtest){
+						if(jj < jtest){
+							if(issueCtr > 0 && tabRowCtr > 0){
+								var para = document.createElement('p');
+								para.innerHTML += '&nbsp;';
+								para.setAttribute('class', levelname.replace(/ /g,"_"));
+								if(resolvedCtr > 0){
 									$(para).addClass('Resolved');
-									tmpHidIt="Hiddable";//Debugging
-									resolvedCtr2++;
-							}else{resolvedCtr2=0;}
-							if(resolvedCtr2 == 0 && jj==jtest){
-								madeIt = "Made It";//Debugging
-								$(para).removeClass('Resolved');
+								}else{resolvedCtr2=1;}
+								parentElementID.appendChild(para);parentElementID.appendChild(para);
 							}
-							parentElementID.appendChild(para);parentElementID.appendChild(para);
-						}else{
-							tmpHidIt="None";//Debugging
-							resolvedCtr2++;
 						}
-
-
-
-
-						var issuefirstword=myModules[key][j][2].slice(0,10);//Debugging
-						var errorlog = errorlog + '<tr><td>dID: '+dateID+'</td><td>Lvl: '+levelname+'</td><td>Key: '+key+'</td><td>Issue: '+issuefirstword+'</td><td>j: '+j+'</td><td>issueCtr: '+issueCtr+'</td><td>tabRowCtr: '+tabRowCtr+'</td><td>resolvedCtr: '+resolvedCtr+'</td><td>resolvedCtr2:'+resolvedCtr2+'</td><td>Para :'+tmpHidIt+'</td><td>'+madeIt+'</td></tr>';//Debugging
+					}
+					var moduleParaID = 'p-' + levelname.replace(/ /g,"_")+"-"+key.replace(/ /g,"_")+'-'+dateID.replace(/ /g,"_");
+					var para = document.createElement('p');
+					para.innerHTML += '&nbsp;';
+					para.setAttribute('id', moduleParaID+"-lastpara");
+					para.setAttribute('class', levelname.replace(/ /g,"_")+" last");
+					if(resolvedCtr2 == 1 && resolvedCtr3 > 0){
+						$(para).addClass('Resolved');
+					}
+					parentElementID.appendChild(para);parentElementID.appendChild(para);
+					if(resolvedCtr3 == jtest){
+						$('#'+moduleParaID).addClass('Resolved');
+						$('#'+moduleParaID+"-lastpara").addClass('Resolved');
+						resolvedCtr4++;
 					}
 				}
 			}
-		//	makeSscPara(dateID, '\xa0', levelname+'-endp','');
-
+			var levelParaID = 'p-' + levelname.replace(/ /g,"_")+"-"+levelname.replace(/ /g,"_")+'-'+dateID.replace(/ /g,"_");
+			if(resolvedCtr4 == levelCtr){
+				$('#'+levelParaID).addClass('Resolved');
+			}
 		}
 		$('#ajax-loader-'+dateID).hide();
 	}
 	if(filterDefault){filterOnLoad(filterDefault);}
 	if(resolvedDefault){hideResolved()};
-
-$('#output').append(errorlog);//Debugging
 }
 
 
@@ -493,7 +492,7 @@ function makeSscPara(parentID, paraContents, paraID, style){
    			var para = document.createElement('p');
     		para.appendChild(txtObj);
     		para.setAttribute('style', style);
- 			para.setAttribute('id', 'p-' + paraID.replace(/ /g,"_")+"-"+paraContents.replace(/ /g,"_"));
+ 			para.setAttribute('id', 'p-' + paraID.replace(/ /g,"_")+"-"+paraContents.replace(/ /g,"_")+'-'+parentID.replace(/ /g,"_"));
 			para.setAttribute('class', paraID.replace(/ /g,"_"));
 			parentElementID.appendChild(para);
 }
