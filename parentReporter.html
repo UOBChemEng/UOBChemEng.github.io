@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<body>
+        <textarea id="codegoeshere" style="width:100%;height:630px;">Grab the parent's html</textarea></div>
+
+        <script language="javascript">
+            var mydoc = document.documentElement.outerHTML;
+            var parentdoc = parent.document.documentElement.outerHTML;
+
+            console.log("mydoc: ");
+            console.log(mydoc);
+            console.log("parentdoc: ");
+            console.log(parentdoc);
+
+            document.getElementById('codegoeshere').innerHTML = parentdoc;
+        </script>
+	</body>
+</html>
