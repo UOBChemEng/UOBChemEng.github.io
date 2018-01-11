@@ -100,7 +100,7 @@ function extractSheetrockResponse(response){
 	for(i=0;i<response.rows.length;i++){
 		dataArr.push([]);
 		for(j=0;j<response.rows[i].cellsArray.length;j++){
-				dataArr[i].push(sanitize(response.rows[i].cellsArray[j]));
+			dataArr[i].push(sanitize(response.rows[i].cellsArray[j]));
 		}
 	}
 	return dataArr;

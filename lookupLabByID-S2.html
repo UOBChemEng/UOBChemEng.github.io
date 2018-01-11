@@ -24,12 +24,13 @@ function getlabs(){
 		{
 		document.getElementById('dvTable').innerHTML="Retrieving Data...";
 		var sql='select E,F,G,H,I,K,L,M,O,P,Q where S contains ';
-		sql = sql + "152" //document.getElementById('idno').value;
+		sql = sql + document.getElementById('idno').value;
 		var gsUrl =  getGoogleSheetURL( '1V1LiMJWAU6JVsdQUnHVoq7lFgcEIETj5wVY0CmnDUXY/', '1243595205');
 		sheetrock({
 			url: gsUrl,
 			query: sql,
-			callback: formatData
+			callback: formatData,
+			reset: true
 		});
 	} else {
 	return false;
@@ -39,42 +40,53 @@ function getlabs(){
 
 function formatData(error,options,response){
 	if(error){
-		document.getElementById('dvTable').innerHTML = "Could Not Retrieve Data";
+		document.getElementById('dvTable').innerHTML = "Could Not Retrieve Data - Please Reload Page";
+		return;
 	}else{
-		console.log(response);
-		getData = extractSheetrockResponse(response);
-
+		if(response.rows.length<2){
+			document.getElementById('dvTable').innerHTML = "Could Not Retrieve Data - Check ID Number";
+			return;
+		}
+		var getData = extractSheetrockResponse(response);
+			buildTable(getData);
 	}
-
-
-
-	console.log(getData);
 }
 
 
+function buildTable(getData){
+	table = $('<table></table>').attr('width','450px');
+	tbody = $('<tbody></tbody>');
+	var border='thin solid #000'
+	var trh = $('<tr></tr>').css('background-color','#F1F1F1');
+	var thh = $('<th></th>').attr('colspan',4).css('border',border);
+	thh.text("Labs for "+getData[1][0]+" "+getData[1][1]);
+	var tr = $('<tr></tr>').css('background-color','#F1F1F1');
+	var th1 = $('<th></th>').text("Lab").css('border',border);
+	var th2 = $('<th></th>').text("Date").css('border',border);
+	var th3 = $('<th></th>').text("Time").css('border',border);
+	var th4 = $('<th></th>').text("Group").css('border',border);
+	tbody.append(trh.append(thh));
+	tbody.append(tr.append(th1).append(th2).append(th3).append(th4));
+	var labNameCntr=2;
+	for(i=0;i<3;i++){
+		var tr = $('<tr></tr>');
+		var td1 = $('<td></td>').text(getData[0][labNameCntr].split(/[':']+/)[0]);
+		var td2 = $('<td></td>').text(getData[1][labNameCntr]);
+		var td3 = $('<td></td>').text(getData[1][labNameCntr+1]);
+		var td4 = $('<td></td>').text("Chem "+getData[1][labNameCntr+2]);
+		td1.css('border',border);
+		td2.css('border',border);
+		td3.css('border',border);
+		td4.css('border',border);
+		labNameCntr=labNameCntr+3;
+		tbody.append(tr.append(td1).append(td2).append(td3).append(td4));
+	}
+	document.getElementById('dvTable').innerHTML = "";
+	$('#dvTable').append(table.append(tbody));
+}
 
-/*	function getlabs()
-		{
-		if (test_ID() )
-			{
-			document.getElementById('dvTable').innerHTML="Retrieving Data...";
-			var joinedvalues = buildquery();
-			var built_url = buildurl(joinedvalues);
-			$.getJSON(built_url);
-			} else {
-			return false;
-			}
-		}
 
-	var my_callback = function(data)
-		{
-		data = parse(data);
-		if(!data){document.getElementById('dvTable').innerHTML = "ID Number Not Found";return false;}
-		data_array = second_parse(data[0]);
-		build_table(data_array);
-		}
-*/
-	function test_ID(){
+function test_ID(){
 		var value = document.getElementById('idno').value;
 		if(!/^\d*$/.test(document.getElementById('idno').value)){
         	document.getElementById('dvTable').innerHTML = "Please Enter a valid ID Number";
@@ -89,153 +101,6 @@ function formatData(error,options,response){
        		document.getElementById('dvTable').innerHTML = "";
     		return true;
     	}}
-/*
-
-	function buildquery()
-		{
-		var sql = "select B,C,E,F,G,H,I,J,K,L,M where N contains ";
-		return sql + document.getElementById('idno').value;
-		}
-
-	function buildurl(my_query)
-		{
-		var my_url = 'https://spreadsheets.google.com/a/google.com/tq?',
-        params = {
-            key: '1V1LiMJWAU6JVsdQUnHVoq7lFgcEIETj5wVY0CmnDUXY',
-            tq: encodeURIComponent(my_query),
-            tqx: 'responseHandler:' + 'my_callback',
-			gid: '1243595205',
-		callback: '?'
-       		},
-        qs = [];
-   		for (var key in params)
-    		{
-    	    qs.push(key + '=' + params[key]);
-    		}
-    	my_url += qs.join('&');
-    	return my_url
-		}
-
-
-	function parse(data)
-		{
-    	var column_length = data.table.cols.length;
-    	if (!column_length || !data.table.rows.length)
-    		{
-        	return false;
-    		}
-	    var columns = [],result = [],row_length,value;
-	    for (var column_idx in data.table.cols)
-    		{
-        	columns.push(data.table.cols[column_idx].label);
-   			}
-    	for (var rows_idx in data.table.rows)
-    		{
-        	row_length = data.table.rows[rows_idx]['c'].length;
-        	if (column_length != row_length)
-        		{
-            	// Houston, we have a problem!
-            	return false;
-        		}
-        	for (var row_idx in data.table.rows[rows_idx]['c'])
-        		{
-            	if (!result[rows_idx])
-            		{
-            	    result[rows_idx] = {};
-            		}
-            	value = !!data.table.rows[rows_idx]['c'][row_idx].v ? data.table.rows[rows_idx]['c'][row_idx].v : null;
-            	result[rows_idx][columns[row_idx]] = value;
-        		}
-    		}
-    	return result;
-		};
-
-	function second_parse(my_data)
-		{
-		var my_data_array = [];
-		my_data_array[0] = removeTags(my_data['First Name']);
-		my_data_array[1] = removeTags(my_data['Surname']);
-		my_data_array[2] = removeTags(my_data['LMS Date']);
-		my_data_array[3] = removeTags(my_data['LMS Time']);
-		my_data_array[4] = removeTags(my_data['LMS Group']);
-		my_data_array[5] = removeTags(my_data['HT1 Date']);
-		my_data_array[6] = removeTags(my_data['HT1 Time']);
-		my_data_array[7] = removeTags(my_data['HT1 Group']);
-		my_data_array[8] = removeTags(my_data['DIS Date']);
-		my_data_array[9] = removeTags(my_data['DIS Time']);
-		my_data_array[10] = removeTags(my_data['DIS Group']);
-		return my_data_array;
-		}
-
-	function build_table(table_data_array)
-		{
-		var table=document.createElement("TABLE");
-		table.setAttribute("width", "450px");
-		var Table_Contents = [];
-		Table_Contents.push(["Lab","Date","Time","Group"]);
-		Table_Contents.push(["LMS",table_data_array[2],table_data_array[3],table_data_array[4]]);
-		Table_Contents.push(["HT1",table_data_array[5],table_data_array[6],table_data_array[7]]);
-		Table_Contents.push(["DIS",table_data_array[8],table_data_array[9],table_data_array[10]]);
-     	var columnCount = Table_Contents[0].length;
-	    var row = table.insertRow(-1);
-	    row.style.backgroundColor = "#F1F1F1";
-	    var headerCell = document.createElement("TH");
-	        headerCell.innerHTML = "Labs for " + table_data_array[0] + " " + table_data_array[1];
-	        headerCell.setAttribute("colspan", "4");
-	    	headerCell.style.border = "thin solid #000000";
-	        row.appendChild(headerCell);
-		var row = table.insertRow(-1);
-	    row.style.backgroundColor = "#F1F1F1";
-	    for (var i = 0; i < columnCount; i++)
-	    	{
-	        var headerCell = document.createElement("TH");
-	        headerCell.innerHTML = Table_Contents[0][i];
-	    	headerCell.style.border = "thin solid #000000";
-	        row.appendChild(headerCell);
-		    }
-	    for (var i = 1; i < Table_Contents.length; i++)
-	    	{
-        	row = table.insertRow(-1);
-        	row.style.textAlign = "center";
-        	for (var j = 0; j < columnCount; j++)
-        		{
-        	    var cell = row.insertCell(-1);
-        	    cell.innerHTML = Table_Contents[i][j];
- 	    		cell.style.border = "thin solid #000000";
-       		}
-		    }
- 	    var dvTable = document.getElementById("dvTable");
-    	dvTable.innerHTML = "";
-    	dvTable.appendChild(table);
-		}
-
-
-*/
-//	var tagBody = '(?:[^"\'>]|"[^"]*"|\'[^\']*\')*';
-//	var tagOrComment = new RegExp(
-//    	'<(?:'
-//    	// Comment body.
-//    	+ '!--(?:(?:-*[^->])*--+|-?)'
-//    	// Special "raw text" elements whose content should be elided.
-//    	+ '|script\\b' + tagBody + '>[\\s\\S]*?</script\\s*'
-//    	+ '|style\\b' + tagBody + '>[\\s\\S]*?</style\\s*'
-//    	// Regular name
-//    	+ '|/?[a-z]'
-//    	+ tagBody
-//    	+ ')>',
-//    	'gi');
-//	function removeTags(html)
-//		{
-//		var oldHtml;
-//		do
-//			{
-//    		oldHtml = html;
-//    		html = html.replace(tagOrComment, '');
-//  			} while (html !== oldHtml);
-//  		return html.replace(/</g, '&lt;');
-//		}
-
-
 </script>
 
 </body>
