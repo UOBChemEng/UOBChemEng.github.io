@@ -2,12 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="js/vendor/sheetrock.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sheetrock/1.1.4/dist/sheetrock.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
+<script>window.sheetrock || document.write('<script src="js/vendor/sheetrock.min.js"><\/script>')</script>
+<script src="js/UOBChemEngMain-0.0.2.js"></script>
 </head>
 <body>
 
-	
+
 <div id="dvTableHeader" style="text-align:center;width:450px;">
 Please enter your Student ID Number:&nbsp;&nbsp; <input type="text" name="idno" id="idno" value="" onKeyUp="getlabs()"></div>
 <!--<input type="submit" value="Get Labs" onClick="getlabs()">-->
@@ -22,11 +25,9 @@ function getlabs(){
 		document.getElementById('dvTable').innerHTML="Retrieving Data...";
 		var sql='select E,F,G,H,I,K,L,M,O,P,Q where S contains ';
 		sql = sql + document.getElementById('idno').value;
-		var baseUrl = 'https://docs.google.com/spreadsheets/d/';
-		var key = '1V1LiMJWAU6JVsdQUnHVoq7lFgcEIETj5wVY0CmnDUXY/';
-		var gid= 'edit#gid=1243595205';
+		var gsUrl =  getSpreadsheetUrl( '1V1LiMJWAU6JVsdQUnHVoq7lFgcEIETj5wVY0CmnDUXY/', '1243595205');
 		sheetrock({
-			url: baseUrl+key+gid,
+			url: gsUrl,
 			query: sql,
 			callback: formatData
 		});
@@ -36,8 +37,17 @@ function getlabs(){
 }
 
 
-function formatData(){
-	console.log(arguments);
+function formatData(error,options,response){
+	if(error){
+		document.getElementById('dvTable').innerHTML = "Could Not Retrieve Data";
+	}else{
+		//var getData = extractSheetrockResponse();
+
+	}
+
+
+
+	console.log(response);
 }
 
 
