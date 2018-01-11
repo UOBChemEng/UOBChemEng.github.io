@@ -41,13 +41,14 @@ function formatData(error,options,response){
 	if(error){
 		document.getElementById('dvTable').innerHTML = "Could Not Retrieve Data";
 	}else{
-		//var getData = extractSheetrockResponse();
+		console.log(response);
+		getData = extractSheetrockResponse(response);
 
 	}
 
 
 
-	console.log(response);
+	console.log(getData);
 }
 
 
@@ -75,7 +76,6 @@ function formatData(error,options,response){
 */
 	function test_ID(){
 		var value = document.getElementById('idno').value;
-		console.log(value.length);
 		if(!/^\d*$/.test(document.getElementById('idno').value)){
         	document.getElementById('dvTable').innerHTML = "Please Enter a valid ID Number";
 			return false;
