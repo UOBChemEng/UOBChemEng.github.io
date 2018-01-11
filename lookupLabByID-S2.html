@@ -24,7 +24,7 @@ function getlabs(){
 		{
 		document.getElementById('dvTable').innerHTML="Retrieving Data...";
 		var sql='select E,F,G,H,I,K,L,M,O,P,Q where S contains ';
-		sql = sql + document.getElementById('idno').value;
+		sql = sql + "152" //document.getElementById('idno').value;
 		var gsUrl =  getSpreadsheetUrl( '1V1LiMJWAU6JVsdQUnHVoq7lFgcEIETj5wVY0CmnDUXY/', '1243595205');
 		sheetrock({
 			url: gsUrl,
