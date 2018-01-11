@@ -61,6 +61,15 @@ function getSpreadsheetUrl(sheetKey,sheetGID)
 	return ssUrl1+details[sheetKey]['key']+ssUrl2+details[sheetKey][sheetGID];
 	}
 
+
+function getGoogleSheetURL(sheetKey,sheetGID){
+	var ssUrl1 = "https://docs.google.com/spreadsheets/d/"
+	var ssUrl2 = "/edit#gid=";
+	return ssUrl1+sheetKey+ssUrl2+sheetGID;
+
+}
+
+
 function printElement(myElementID,myWindowTitle,dynamicElementID)
 	{
 		if(dynamicElementID){
@@ -85,3 +94,10 @@ function urlParam(name, w){
 	        val = w.location.search.match(rx);
 	    return !val ? '':val[1];
 	}
+
+function extractSheetrockResponse(response){
+	var dataArr=[];
+	//for(i=0;i<response.)
+
+
+}
