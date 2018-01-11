@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="js/vendor/sheetrock.min.js"></script>
 </head>
 <body>
 
@@ -13,7 +14,34 @@ Please enter your Student ID Number:&nbsp;&nbsp; <input type="text" name="idno" 
 
 <script language="javascript">
 
-	function getlabs()
+
+function getlabs(){
+	if (test_ID() )
+		{
+		document.getElementById('dvTable').innerHTML="Retrieving Data...";
+		var sql='select E,F,G,H,I,K,L,M,O,P,Q where S contains ';
+		sql = sql + document.getElementById('idno').value;
+		var baseUrl = 'https://docs.google.com/spreadsheets/d/';
+		var key = '1V1LiMJWAU6JVsdQUnHVoq7lFgcEIETj5wVY0CmnDUXY/';
+		var gid= 'edit#gid=1243595205';
+		sheetrock({
+			url: baseUrl+key+gid,
+			query: sql,
+			callback: formatData
+		});
+	} else {
+	return false;
+	}
+}
+
+
+function formatData(){
+	console.log(arguments);
+}
+
+
+
+/*	function getlabs()
 		{
 		if (test_ID() )
 			{
@@ -33,7 +61,7 @@ Please enter your Student ID Number:&nbsp;&nbsp; <input type="text" name="idno" 
 		data_array = second_parse(data[0]);
 		build_table(data_array);
 		}
-
+*/
 	function test_ID(){
 		var value = document.getElementById('idno').value;
 		console.log(value.length);
@@ -50,6 +78,7 @@ Please enter your Student ID Number:&nbsp;&nbsp; <input type="text" name="idno" 
        		document.getElementById('dvTable').innerHTML = "";
     		return true;
     	}}
+/*
 
 	function buildquery()
 		{
@@ -170,30 +199,30 @@ Please enter your Student ID Number:&nbsp;&nbsp; <input type="text" name="idno" 
 		}
 
 
-
-	var tagBody = '(?:[^"\'>]|"[^"]*"|\'[^\']*\')*';
-	var tagOrComment = new RegExp(
-    	'<(?:'
-    	// Comment body.
-    	+ '!--(?:(?:-*[^->])*--+|-?)'
-    	// Special "raw text" elements whose content should be elided.
-    	+ '|script\\b' + tagBody + '>[\\s\\S]*?</script\\s*'
-    	+ '|style\\b' + tagBody + '>[\\s\\S]*?</style\\s*'
-    	// Regular name
-    	+ '|/?[a-z]'
-    	+ tagBody
-    	+ ')>',
-    	'gi');
-	function removeTags(html)
-		{
-		var oldHtml;
-		do
-			{
-    		oldHtml = html;
-    		html = html.replace(tagOrComment, '');
-  			} while (html !== oldHtml);
-  		return html.replace(/</g, '&lt;');
-		}
+*/
+//	var tagBody = '(?:[^"\'>]|"[^"]*"|\'[^\']*\')*';
+//	var tagOrComment = new RegExp(
+//    	'<(?:'
+//    	// Comment body.
+//    	+ '!--(?:(?:-*[^->])*--+|-?)'
+//    	// Special "raw text" elements whose content should be elided.
+//    	+ '|script\\b' + tagBody + '>[\\s\\S]*?</script\\s*'
+//    	+ '|style\\b' + tagBody + '>[\\s\\S]*?</style\\s*'
+//    	// Regular name
+//    	+ '|/?[a-z]'
+//    	+ tagBody
+//    	+ ')>',
+//    	'gi');
+//	function removeTags(html)
+//		{
+//		var oldHtml;
+//		do
+//			{
+//    		oldHtml = html;
+//    		html = html.replace(tagOrComment, '');
+//  			} while (html !== oldHtml);
+//  		return html.replace(/</g, '&lt;');
+//		}
 
 
 </script>
