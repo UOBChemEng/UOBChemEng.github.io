@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name Tutor-Sidebar
+// @name PebblePad-All-Scripts
 // @description Insert tutee name in to title of form.
 // @author Alex Robinson
 // @namespace uobchemeng.github.io/CustomisePebblePad.html
